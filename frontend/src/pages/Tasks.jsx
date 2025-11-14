@@ -3,22 +3,18 @@ import Loading from "../components/Loading";
 import useForm from "../hooks/useForm";
 
 const Tasks = () => {
-    // Estados de la lista de tareas
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Hook del formulario, nos da setValues para rellenarlo
     const { values, setValues, handleChange, handleReset } = useForm({
         title: "",
         description: "",
-        is_completed: false, // Valor inicial del checkbox
+        is_completed: false,
     });
 
-    // Estado para saber si estamos creando o editando
     const [idToEdit, setIdToEdit] = useState(null);
 
     const fetchTasks = async () => {
-        // Solo mostramos el loading la primera vez
         if (tasks.length === 0) {
             setLoading(true);
         }
@@ -30,7 +26,6 @@ const Tasks = () => {
 
             if (res.ok) {
                 const data = await res.json();
-                // Aseguramos que tasks sea siempre un array
                 setTasks(data.tasks || (Array.isArray(data) ? data : []));
             } else {
                 console.error("Error al obtener las tareas");
@@ -48,12 +43,9 @@ const Tasks = () => {
         fetchTasks();
     }, []);
 
-    // Funcion para manejar el envios
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Si "idToEdit" tiene un ID, llamamos a la funcion para actualizar
-        // Si es "null", llamamos a la funcion para crear una tarea
         if (idToEdit) {
             handleUpdateTask();
         } else {
@@ -61,11 +53,8 @@ const Tasks = () => {
         }
     };
 
-    // Funcion que se llama al presionar Editar en una tarea
     const handleSelectEdit = (task) => {
-        // Ponemos el ID de la tarea seleccionada en el estado "idToEdit"
         setIdToEdit(task.id);
-        // Usamos "setValues" del useForm para rellenar el formulario con los valores que continen
         setValues({
             title: task.title,
             description: task.description,
@@ -73,13 +62,11 @@ const Tasks = () => {
         });
     };
 
-    // Funcion para Cancelar operacion
     const handleCancelEdit = () => {
-        setIdToEdit(null); // Salimos del modo Editar
-        handleReset(); // Vaciamos el formulario
+        setIdToEdit(null);
+        handleReset();
     };
 
-    // Funcion para Crear
     const handleCreateTask = async () => {
         if (!values.title) {
             alert("El título es obligatorio");
@@ -106,7 +93,6 @@ const Tasks = () => {
         }
     };
 
-    // Funcion para Actualizar
     const handleUpdateTask = async () => {
         if (!values.title) {
             alert("El título es obligatorio");
@@ -122,7 +108,7 @@ const Tasks = () => {
 
             if (res.ok) {
                 alert("¡Tarea actualizada exitosamente!");
-                handleCancelEdit(); // Limpia el formulario y sale del modo Editar
+                handleCancelEdit();
                 fetchTasks();
             } else {
                 const data = await res.json();
@@ -134,7 +120,6 @@ const Tasks = () => {
         }
     };
 
-    // Funcion para Borrar
     const handleDelete = async (taskId) => {
         if (!window.confirm("¿Estás seguro de que quieres eliminar esta tarea?")) {
             return;
@@ -162,7 +147,16 @@ const Tasks = () => {
     return (
         <main style={{ minHeight: '100vh', background: 'linear-gradient(120deg, #f5f7fa 0%, #c3cfe2 100%)', color: '#222', padding: 24, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div style={{ maxWidth: 900, width: '100%', margin: '0 auto', display: 'flex', gap: 40 }}>
-                <section style={{ flex: 1, backdropFilter: 'blur(16px)', background: 'rgba(255,255,255,0.25)', borderRadius: 18, boxShadow: '0 8px 32px #c3cfe2', padding: 32, border: '1.5px solid rgba(255,255,255,0.18)' }}>
+                <section style={{
+                    flex: 1,
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    background: 'rgba(255,255,255,0.18)',
+                    borderRadius: 18,
+                    boxShadow: '0 8px 32px 0 rgba(31,38,135,0.37)',
+                    padding: 32,
+                    border: '1.5px solid rgba(255,255,255,0.28)'
+                }}>
                     <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 18, letterSpacing: 1, color: '#764ba2' }}>{idToEdit ? 'Editar' : 'Crear'} Tarea</h2>
                     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                         <input

@@ -6,11 +6,7 @@ const useForm = (initialValues = {}) => {
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         const newValue = type === "checkbox" ? checked : value;
-        setValues((prevValues) => ({ ...prevValues, [name]: newValue })); // Mejorado para evitar "race conditions"
-        /*
-        Una race condition ocurre cuando dos o mas procesos acceden o modifican el mismo recurso
-        compartido al mismo tiempo y el resultado final depende del orden en que se ejecuten osea se apuesta a cual se modifica primero
-        */
+        setValues((prevValues) => ({ ...prevValues, [name]: newValue }));
         setValues({ ...values, [name]: newValue });
     };
 

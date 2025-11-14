@@ -19,7 +19,6 @@ const Register = ({ onLoginSuccess }) => {
         e.preventDefault();
         setLoading(true);
 
-        // Mapeando los datos como pide el backend
         const payload = {
             name: values.firstname,
             lastname: values.lastname,
@@ -56,7 +55,18 @@ const Register = ({ onLoginSuccess }) => {
     return (
         <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(120deg, #f5f7fa 0%, #c3cfe2 100%)', color: '#222' }}>
             {loading && <Loading />}
-            <div style={{ width: '100%', maxWidth: 400, padding: 36, borderRadius: 18, background: '#fff', boxShadow: '0 8px 32px #c3cfe2', marginTop: 24 }}>
+            <div style={{
+                width: '100%',
+                maxWidth: 400,
+                padding: 36,
+                borderRadius: 18,
+                background: 'rgba(255,255,255,0.18)',
+                boxShadow: '0 8px 32px 0 rgba(31,38,135,0.37)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                border: '1.5px solid rgba(255,255,255,0.28)',
+                marginTop: 24
+            }}>
                 <h2 style={{ fontSize: 28, fontWeight: 700, textAlign: 'center', marginBottom: 18, letterSpacing: 1, color: '#764ba2' }}>Crear cuenta</h2>
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
                     <input

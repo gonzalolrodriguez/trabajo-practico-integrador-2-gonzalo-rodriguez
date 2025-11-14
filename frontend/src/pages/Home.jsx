@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import Loading from "../components/Loading";
@@ -7,7 +8,6 @@ const Home = () => {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Funcion para cargar ambos datos (perfil y tareas)
     const loadHomeData = async () => {
         try {
             const profilePromise = fetch("http://localhost:3000/api/profile", {
@@ -17,13 +17,11 @@ const Home = () => {
                 credentials: "include",
             });
 
-            // Ejecutamos ambas peticiones al mismo tiempo
             const [profileRes, tasksRes] = await Promise.all([
                 profilePromise,
                 tasksPromise,
             ]);
 
-            // Procesamos los datos del perfil
             if (profileRes.ok) {
                 const profileData = await profileRes.json();
                 setUserData(profileData.user);
@@ -31,7 +29,6 @@ const Home = () => {
                 console.error("Error al cargar el perfil");
             }
 
-            // Procesamos los datos de las tareas
             if (tasksRes.ok) {
                 const tasksData = await tasksRes.json();
                 setTasks(
@@ -59,7 +56,20 @@ const Home = () => {
     if (loading) {
         return (
             <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(120deg, #f5f7fa 0%, #c3cfe2 100%)', color: '#222' }}>
-                <Loading />
+                <div style={{
+                    width: '100%',
+                    maxWidth: 420,
+                    padding: 36,
+                    borderRadius: 18,
+                    background: 'rgba(255,255,255,0.18)',
+                    boxShadow: '0 8px 32px 0 rgba(31,38,135,0.37)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    border: '1.5px solid rgba(255,255,255,0.28)',
+                    marginTop: 24
+                }}>
+                    <Loading />
+                </div>
             </main>
         );
     }

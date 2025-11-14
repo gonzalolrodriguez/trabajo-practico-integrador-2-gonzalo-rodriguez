@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Loading from "../components/Loading";
@@ -49,7 +50,20 @@ const Profile = ({ onLogout }) => {
         <main style={{ minHeight: '100vh', background: 'linear-gradient(120deg, #f5f7fa 0%, #c3cfe2 100%)', color: '#222', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {loading && <Loading />}
             {!loading && userData && (
-                <div style={{ width: '100%', maxWidth: 370, padding: 32, borderRadius: 18, background: '#fff', boxShadow: '0 8px 32px #c3cfe2', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div style={{
+                    width: '100%',
+                    maxWidth: 370,
+                    padding: 32,
+                    borderRadius: 18,
+                    background: 'rgba(255,255,255,0.18)',
+                    boxShadow: '0 8px 32px 0 rgba(31,38,135,0.37)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    border: '1.5px solid rgba(255,255,255,0.28)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                }}>
                     <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'linear-gradient(135deg, #c3cfe2 0%, #f5f7fa 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
                         <span style={{ fontSize: 36, color: '#222', fontWeight: 700 }}>{userData.name?.charAt(0) || '?'}</span>
                     </div>
