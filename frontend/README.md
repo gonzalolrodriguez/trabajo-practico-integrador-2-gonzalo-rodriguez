@@ -1,16 +1,41 @@
-# React + Vite
+# Título del Proyecto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TP Integrador
 
-Currently, two official plugins are available:
+## Descripción breve
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ToDo App con React (frontend) y Node.js/Express (backend).
 
-## React Compiler
+## Instrucciones de instalación
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+1. Clona el repositorio:
+   ```sh
+   git clone <https://github.com/gonzalolrodriguez/trabajo-practico-integrador-2-gonzalo-rodriguez.git>
+   ```
+2. Instala dependencias en el frontend:
+   ```sh
+   cd frontend
+   npm install
+   ```
+3. Instala dependencias en el backend:
+   ```sh
+   cd ../backend
+   npm install
+   ```
 
-## Expanding the ESLint configuration
+## Configuración del archivo .env
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Crea un archivo `.env` en la carpeta `backend` con el siguiente contenido de ejemplo:
+
+```
+DB_NAME=tp_integrador
+DB_USER=
+DB_PASSWORD=
+DB_HOST=localhost
+DB_DIALECT=mysql
+DB_PORT=3306
+JWT_SECRET=jwt_secret
+PORT=3000
+```
+
+Ajusta los valores según tu entorno local.
